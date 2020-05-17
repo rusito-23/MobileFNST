@@ -1,0 +1,11 @@
+platform :ios, '11.0'
+
+workspace 'FNST'
+project 'FNST.xcodeproj'
+
+target 'FNST' do
+    project 'FNST.xcodeproj'
+
+    pod 'OpenCV'
+    pod 'TensorFlowLiteObjC'
+end

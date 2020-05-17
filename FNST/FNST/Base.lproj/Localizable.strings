@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  FNST
+
+  Created by Igor Andruskiewitsch on 5/17/20.
+  Copyright © 2020 rusito.23. All rights reserved.
+*/
+
+"TITLE_LABEL" = "Fast Neural Style Transfer!";
