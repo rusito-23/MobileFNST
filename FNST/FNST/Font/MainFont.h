@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface MainFont : NSObject
 + (UIFont *) title;
 + (UIFont *) subtitle;
@@ -18,5 +16,3 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIFont *) paragraph;
 + (UIFont *) miniParagraph;
 @end
-
-NS_ASSUME_NONNULL_END

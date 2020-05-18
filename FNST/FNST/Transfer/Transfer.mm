@@ -8,12 +8,12 @@
 
 #include "Transfer.h"
 #include "Constants.h"
-#include "Utils.h"
 #include "Messages.h"
 #include <TensorFlowLiteObjC/TFLTensorFlowLite.h>
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc_c.h>
 #include <opencv2/imgproc/imgproc.hpp>
+#include <math.h>
 
 #pragma mark - Properties
 
@@ -44,6 +44,12 @@ static NSString *const kModelType = @"tflite";
     // reshape input tensor
     if (![self.interpreter resizeInputTensorAtIndex:0 toShape:INPUT_SHAPE error:&err]) {
         NSLog(kTransferError, @"Reshape input tensor", err.localizedDescription);
+        return nil;
+    }
+
+    // reshape output tensor
+    if (![self.interpreter resizeInputTensorAtIndex:0 toShape:OUTPUT_SHAPE error:&err]) {
+        NSLog(kTransferError, @"Reshape output tensor", err.localizedDescription);
         return nil;
     }
 
@@ -112,15 +118,22 @@ static NSString *const kModelType = @"tflite";
         return;
     }
 
-    // convert output data to vector
-    float output[OUTPUT_LEN];
-    [outputData getBytes:output length:(sizeof(float)*OUTPUT_LEN)];
-    std::vector<float> output_vector(output, output + sizeof(output) / sizeof(output[0]));
+    // convert output data to resulting Mat
+    float *o = (float*)malloc(OUTPUT_LEN * sizeof(float));
+    [outputData getBytes:o length:(sizeof(float)*OUTPUT_LEN)];
 
-    // TODO: channels last & clipping
+    // transpose
+    float *transposed = (float*)malloc(OUTPUT_LEN * sizeof(float));
+    int j = 0;
+    for (int i = 0; i < SIZE; i++) {
+        transposed[j] = o[i];
+        transposed[j++] = o[i + SIZE];
+        transposed[++j] = o[i + 2*SIZE];
+    }
 
-    // init resulting Mat
-    cv::Mat result = cv::Mat(output_vector, false).reshape(4, {SIZE, SIZE});
+    cv::Mat result(SIZE, SIZE, CV_32FC3, transposed);
+    free(o); free(transposed);
+
 
     NSLog(kTransferSuccess);
     completion(YES, result);

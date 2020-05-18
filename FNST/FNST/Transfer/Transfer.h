@@ -9,12 +9,8 @@
 #import <Foundation/Foundation.h>
 #include <opencv2/core/core.hpp>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface Transfer : NSObject
 -(instancetype) initWithModelName:(NSString*)modelName andError:(NSError * __autoreleasing *)error;
 -(BOOL) isValid;
 -(void) processImage:(cv::Mat) src withCompletion:(void (^)(BOOL succeeded, cv::Mat result)) completion;
 @end
-
-NS_ASSUME_NONNULL_END

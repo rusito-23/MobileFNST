@@ -6,6 +6,8 @@
 //  Copyright © 2020 rusito.23. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 #ifndef Constants_h
 #define Constants_h
 
@@ -13,13 +15,10 @@
 #define CHANNELS 3
 #define BATCH_SIZE 1
 
-#define INPUT_SHAPE @[@BATCH_SIZE, @SIZE, @SIZE, @CHANNELS]
-#define INPUT_LEN SIZE * SIZE * CHANNELS
+static NSArray<NSNumber *> *INPUT_SHAPE = @[@BATCH_SIZE, @CHANNELS, @SIZE, @SIZE];
+static NSArray<NSNumber *> *OUTPUT_SHAPE = @[@BATCH_SIZE, @CHANNELS, @SIZE, @SIZE];
 
-#define OUTPUT_SHAPE @[@BATCH_SIZE, @SIZE, @SIZE, @CHANNELS]
-#define OUTPUT_LEN SIZE * SIZE * CHANNELS
-
-// #define INPUT_SIZE cvSize(128, 128)
-#define RES_SHAPE {64, 64}
+static const NSUInteger INPUT_LEN = SIZE * SIZE * CHANNELS;
+static const NSUInteger OUTPUT_LEN = SIZE * SIZE * CHANNELS;
 
 #endif /* Constants_h */

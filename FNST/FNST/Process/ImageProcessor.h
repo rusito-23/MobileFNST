@@ -9,11 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface ImageProcessor : NSObject
 +(void) createInstanceWithModelName:(NSString*)modelName andCompletion:(void (^)(BOOL succeeded, NSError *error, id instance))completion;
 -(void) processImage:(UIImage*)image withCompletion:(void (^)(BOOL success, UIImage *result))completion;
 @end
-
-NS_ASSUME_NONNULL_END

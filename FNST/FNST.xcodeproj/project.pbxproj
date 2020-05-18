@@ -14,6 +14,7 @@
 		780445F92471D07600DDB406 /* NSString+Localized.m in Sources */ = {isa = PBXBuildFile; fileRef = 780445F82471D07600DDB406 /* NSString+Localized.m */; };
 		780446032471D35300DDB406 /* MainFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 780446022471D35300DDB406 /* MainFont.m */; };
 		7804460B2471D96100DDB406 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 780446092471D96100DDB406 /* Localizable.strings */; };
+		7804460E2471DD6800DDB406 /* cv.png in Resources */ = {isa = PBXBuildFile; fileRef = 7804460D2471DD6800DDB406 /* cv.png */; };
 		78DA874B2471B8EF005E5590 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DA874A2471B8EF005E5590 /* AppDelegate.m */; };
 		78DA874E2471B8EF005E5590 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DA874D2471B8EF005E5590 /* SceneDelegate.m */; };
 		78DA87512471B8EF005E5590 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78DA87502471B8EF005E5590 /* MainViewController.m */; };
@@ -38,6 +39,7 @@
 		780446022471D35300DDB406 /* MainFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainFont.m; sourceTree = "<group>"; };
 		780446042471D71300DDB406 /* MainFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainFont.h; sourceTree = "<group>"; };
 		7804460A2471D96100DDB406 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7804460D2471DD6800DDB406 /* cv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cv.png; sourceTree = "<group>"; };
 		78DA87462471B8EF005E5590 /* FNST.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FNST.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78DA87492471B8EF005E5590 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		78DA874A2471B8EF005E5590 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -131,6 +133,14 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		7804460C2471DD5700DDB406 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				7804460D2471DD6800DDB406 /* cv.png */,
+			);
+			path = Example;
+			sourceTree = "<group>";
+		};
 		7856FC672471BAEB0016A29D /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +209,7 @@
 		78DA87482471B8EF005E5590 /* FNST */ = {
 			isa = PBXGroup;
 			children = (
+				7804460C2471DD5700DDB406 /* Example */,
 				780445FA2471D0D100DDB406 /* Font */,
 				780445E92471C18B00DDB406 /* Utils */,
 				780445EF2471C9F300DDB406 /* Process */,
@@ -237,6 +248,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 78DA875F2471B8F1005E5590 /* Build configuration list for PBXNativeTarget "FNST" */;
 			buildPhases = (
+				780446102471DEB700DDB406 /* Copy Model Files */,
 				820AB855C843F50B0FDA5964 /* [CP] Check Pods Manifest.lock */,
 				78DA87422471B8EF005E5590 /* Sources */,
 				78DA87432471B8EF005E5590 /* Frameworks */,
@@ -289,6 +301,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7804460E2471DD6800DDB406 /* cv.png in Resources */,
 				78DA87592471B8F1005E5590 /* LaunchScreen.storyboard in Resources */,
 				7804460B2471D96100DDB406 /* Localizable.strings in Resources */,
 				78DA87562471B8F1005E5590 /* Assets.xcassets in Resources */,
@@ -299,6 +312,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		780446102471DEB700DDB406 /* Copy Model Files */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Model Files";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rsync -av ${SRCROOT}/../models/tflite/* ${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\n";
+		};
 		820AB855C843F50B0FDA5964 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
