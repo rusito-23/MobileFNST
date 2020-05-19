@@ -3,7 +3,7 @@
 //  FNST
 //
 //  Created by Igor Andruskiewitsch on 5/18/20.
-//  Copyright © 2020 rusito.23. All rights reserved.
+//  Copyright © 2020 Igor Andruskiewitsch. All rights reserved.
 //
 
 import UIKit

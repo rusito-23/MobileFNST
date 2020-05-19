@@ -3,7 +3,7 @@
 //  FNST
 //
 //  Created by Igor Andruskiewitsch on 5/18/20.
-//  Copyright © 2020 rusito.23. All rights reserved.
+//  Copyright © 2020 Igor Andruskiewitsch. All rights reserved.
 //
 
 import UIKit
@@ -13,7 +13,7 @@ class ViewController: UIViewController, TransferDelegate {
     @IBOutlet weak var original: UIImageView!
     @IBOutlet weak var result: UIImageView!
 
-    var transfer: Transfer?
+    var transfer: TransferHandler?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,22 +22,24 @@ class ViewController: UIViewController, TransferDelegate {
         self.original.image = UIImage(named: "cv")
 
         // setup transfer
-        self.transfer = Transfer()
+        self.transfer = TransferHandler()
         self.transfer?.delegate = self
 
         self.runExample()
     }
 
     func runExample() {
-        self.transfer?.process(image: self.original.image)
+        if let image = self.original.image {
+            self.transfer?.process(image: image, with: .Mosaic)
+        }
     }
 
-    func transferSuccess(with image: UIImage?) {
+    func transferSuccess(image: UIImage) {
         self.result.image = image;
     }
 
-    func transferFailure(with error: NSError) {
-        print("ERror bitHC")
+    func transferFailure() {
+        logger.warn("Transfer failure")
     }
 
 }
