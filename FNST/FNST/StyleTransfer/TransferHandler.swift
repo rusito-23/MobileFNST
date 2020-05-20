@@ -49,7 +49,7 @@ class TransferHandler {
 
     // MARK: process
 
-    func process(image: UIImage, with style:TransferStyle) {
+    func process(image: UIImage, style:TransferStyle) {
         guard !self.processing else {
             // avoid processing twice
             return
@@ -61,6 +61,7 @@ class TransferHandler {
         guard let pixelInput = image.pixelBuffer(width: 224, height: 224) else {
             logger.warn("Transfer failure in step: preprocessing")
             self.delegate?.transferFailure()
+            self.processing = false
             return
         }
         let input = TransferInput(with: pixelInput)
@@ -73,6 +74,7 @@ class TransferHandler {
                   let output = try? model.prediction(input: input) else {
                 logger.warn("Transfer failure in step: processing")
                 self.delegate?.transferFailure()
+                self.processing = false
                 return
             }
 
@@ -81,11 +83,13 @@ class TransferHandler {
                 guard let imageOutput = UIImage(pixelBuffer: output.imageOutput) else {
                     logger.warn("Transfer failure in step: post-processing")
                     self.delegate?.transferFailure()
+                    self.processing = false
                     return
                 }
 
                 let resizedOutput = imageOutput.resized(to: originalSize)
                 self.delegate?.transferSuccess(image: resizedOutput)
+                self.processing = false
             }
         }
     }

@@ -10,4 +10,4 @@ coremlmodel = convert(sys.argv[1],
                       minimum_ios_deployment_target='12')
 
 # save
-coremlmodel.save(sys.argv[2].capitalize())
+coremlmodel.save(sys.argv[2])
