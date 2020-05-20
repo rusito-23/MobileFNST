@@ -11,6 +11,7 @@ import UIKit
 class MainViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var mainImage: UIImageView!
     @IBOutlet weak var getStartedInfoLabel: UILabel!
     @IBOutlet weak var cameraLabel: UILabel!
     @IBOutlet weak var galleryLabel: UILabel!
@@ -23,8 +24,8 @@ class MainViewController: UIViewController {
         imagePicker.delegate = self
 
         // setup ui
-        titleLabel.text = "APP_TITLE".localized()
-        titleLabel.font = MainFont.title()
+        titleLabel.addTextOutline("APP_TITLE".localized(), usingFont: MainFont.title())
+
         cameraLabel.text = "CAMERA_BUTTON".localized()
         cameraLabel.font = MainFont.superMiniParagraph()
         galleryLabel.text = "GALLERY_BUTTON".localized()
@@ -32,20 +33,16 @@ class MainViewController: UIViewController {
 
         getStartedInfoLabel.text = "GET_STARTED".localized()
         getStartedInfoLabel.font = MainFont.miniParagraph()
+
+        mainImage.softenBorders()
     }
 
     @IBAction func startFromGallery(_ sender: Any) {
-//        imagePicker.photoGalleryAccessRequest()
-        let errorView = ErrorView()
-        errorView.setupWithSuperView(self.view)
+        imagePicker.photoGalleryAccessRequest()
     }
 
     @IBAction func startFromCamera(_ sender: Any) {
-//        imagePicker.cameraAccessRequest()
-        let errorView = ErrorView()
-        errorView.titleLabel.text = String(format: "PICKER_ERROR_TITLE".localized(), "targetName")
-        errorView.descriptionLabel.text = String(format: "PICKER_ERROR_DESCRIPTION".localized(), "targetName")
-        errorView.setupWithSuperView(self.view)
+        imagePicker.cameraAccessRequest()
     }
 
     private func presentImagePicker(sourceType: UIImagePickerController.SourceType) {

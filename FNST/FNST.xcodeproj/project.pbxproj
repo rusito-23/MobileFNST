@@ -45,6 +45,8 @@
 		789D51BF2473631C00015641 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 789D51BD2473631C00015641 /* LaunchScreen.storyboard */; };
 		78C0206624756D8100CC111B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C0206524756D8100CC111B /* CustomButton.swift */; };
 		78C0206824756D8F00CC111B /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C0206724756D8F00CC111B /* RoundButton.swift */; };
+		78C0206A24757D1400CC111B /* UILabel+Outline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C0206924757D1400CC111B /* UILabel+Outline.swift */; };
+		78C0206C247585A700CC111B /* UIImage+SoftenBorders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C0206B247585A700CC111B /* UIImage+SoftenBorders.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +90,8 @@
 		789D51C02473631C00015641 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78C0206524756D8100CC111B /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		78C0206724756D8F00CC111B /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		78C0206924757D1400CC111B /* UILabel+Outline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Outline.swift"; sourceTree = "<group>"; };
+		78C0206B247585A700CC111B /* UIImage+SoftenBorders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+SoftenBorders.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +196,8 @@
 			isa = PBXGroup;
 			children = (
 				78411AA624742016005809C3 /* String+Localized.swift */,
+				78C0206924757D1400CC111B /* UILabel+Outline.swift */,
+				78C0206B247585A700CC111B /* UIImage+SoftenBorders.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -390,6 +396,7 @@
 				789D51B32473631B00015641 /* AppDelegate.swift in Sources */,
 				78362AFD2473652900CE4CB9 /* TransferHandler.swift in Sources */,
 				78362B13247366CE00CE4CB9 /* UIImage+RawBytes.swift in Sources */,
+				78C0206C247585A700CC111B /* UIImage+SoftenBorders.swift in Sources */,
 				78362B18247366CE00CE4CB9 /* CVPixelBuffer+Helpers.swift in Sources */,
 				78362B12247366CE00CE4CB9 /* Predictions.swift in Sources */,
 				78362B1C247366CE00CE4CB9 /* Array+Extensions.swift in Sources */,
@@ -405,6 +412,7 @@
 				78362B17247366CE00CE4CB9 /* NonMaxSuppression.swift in Sources */,
 				783027BB2474935C00099B11 /* StyleViewCell.swift in Sources */,
 				780D8F3A24743445009763F3 /* Font.swift in Sources */,
+				78C0206A24757D1400CC111B /* UILabel+Outline.swift in Sources */,
 				78362B10247366CE00CE4CB9 /* MLMultiArray+Image.swift in Sources */,
 				783027C424754BA300099B11 /* ErrorView.swift in Sources */,
 				783027C12474BEE800099B11 /* LoadingView.swift in Sources */,

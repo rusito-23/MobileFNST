@@ -11,7 +11,7 @@ import UIKit
 
 struct MainFont {
     private static let NAME = "AvenirNext-Heavy"
-    private static let titleSize: CGFloat = 100
+    private static let titleSize: CGFloat = 120
     private static let subtitleSize: CGFloat = 32
     private static let paragraphSize: CGFloat = 23
     private static let miniParagraphSize: CGFloat = 17
