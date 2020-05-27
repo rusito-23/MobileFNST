@@ -27,6 +27,7 @@ The application allows transfer for the following styles:
 
 - [ONNX Model ZOO](https://github.com/onnx/models/tree/master/vision/style_transfer/fast_neural_style)
 - [Pytorch Original Style Transfer Model](https://github.com/onnx/models/tree/master/vision/style_transfer/fast_neural_style)
+- [CoreML Helpers](https://github.com/hollance/CoreMLHelpers)
 
 ### LICENSE
 
