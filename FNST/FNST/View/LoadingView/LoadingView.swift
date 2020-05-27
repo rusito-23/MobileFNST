@@ -11,8 +11,11 @@ import UIKit
 
 class LoadingView: UIView {
     
-    //   MARK: setup
+    //   MARK: views
+
     @IBOutlet var contentView: UIView!
+
+    // MARK: initialization
     
     required convenience init() {
         self.init(frame: CGRect.zero)
@@ -42,6 +45,8 @@ class LoadingView: UIView {
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         contentView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
     }
+
+    // MARK: UI
     
     private func loadAnimation() {
         let indicator = UIActivityIndicatorView()
@@ -49,8 +54,6 @@ class LoadingView: UIView {
         self.addSubview(indicator)
         indicator.startAnimating()
     }
-    
-    // MARK: Size and constraints handling
     
     public func setupWithSuperView(_ superView: UIView) {
         // setup size

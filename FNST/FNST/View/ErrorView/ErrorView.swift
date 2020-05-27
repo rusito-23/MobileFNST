@@ -10,12 +10,16 @@ import UIKit
 
 class ErrorView: UIView {
 
+    // MARK: views
+
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var roundedView: UIView!
     @IBOutlet weak var errorIconView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var button: CustomButton!
+
+    // MARK: initialization
 
     required convenience init() {
         self.init(frame: CGRect.zero)
@@ -34,6 +38,8 @@ class ErrorView: UIView {
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         contentView.backgroundColor = UIColor.black
     }
+
+    // MARK: UI
 
     private func loadUI() {
         // setup icon

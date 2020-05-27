@@ -47,6 +47,11 @@
 		78C0206824756D8F00CC111B /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C0206724756D8F00CC111B /* RoundButton.swift */; };
 		78C0206A24757D1400CC111B /* UILabel+Outline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C0206924757D1400CC111B /* UILabel+Outline.swift */; };
 		78C0206C247585A700CC111B /* UIImage+SoftenBorders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C0206B247585A700CC111B /* UIImage+SoftenBorders.swift */; };
+		78E79D23247DEB19006D1FB5 /* mosaic.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 78E79D1E247DEB18006D1FB5 /* mosaic.mlmodel */; };
+		78E79D24247DEB19006D1FB5 /* candy.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 78E79D1F247DEB18006D1FB5 /* candy.mlmodel */; };
+		78E79D25247DEB19006D1FB5 /* pointilism.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 78E79D20247DEB19006D1FB5 /* pointilism.mlmodel */; };
+		78E79D26247DEB19006D1FB5 /* rain-princess.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 78E79D21247DEB19006D1FB5 /* rain-princess.mlmodel */; };
+		78E79D27247DEB19006D1FB5 /* udnie.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 78E79D22247DEB19006D1FB5 /* udnie.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +97,11 @@
 		78C0206724756D8F00CC111B /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		78C0206924757D1400CC111B /* UILabel+Outline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Outline.swift"; sourceTree = "<group>"; };
 		78C0206B247585A700CC111B /* UIImage+SoftenBorders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+SoftenBorders.swift"; sourceTree = "<group>"; };
+		78E79D1E247DEB18006D1FB5 /* mosaic.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = mosaic.mlmodel; path = ../../models/coreml/mosaic.mlmodel; sourceTree = "<group>"; };
+		78E79D1F247DEB18006D1FB5 /* candy.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = candy.mlmodel; path = ../../models/coreml/candy.mlmodel; sourceTree = "<group>"; };
+		78E79D20247DEB19006D1FB5 /* pointilism.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = pointilism.mlmodel; path = ../../models/coreml/pointilism.mlmodel; sourceTree = "<group>"; };
+		78E79D21247DEB19006D1FB5 /* rain-princess.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = "rain-princess.mlmodel"; path = "../../models/coreml/rain-princess.mlmodel"; sourceTree = "<group>"; };
+		78E79D22247DEB19006D1FB5 /* udnie.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = udnie.mlmodel; path = ../../models/coreml/udnie.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +239,7 @@
 		789D51B12473631B00015641 /* FNST */ = {
 			isa = PBXGroup;
 			children = (
+				78E79D28247DEB22006D1FB5 /* MLModels */,
 				780D8F3824743445009763F3 /* Helpers */,
 				780D8F33247433E8009763F3 /* View */,
 				78411AA824742116005809C3 /* Logger */,
@@ -289,6 +300,18 @@
 			name = "Support Files";
 			sourceTree = "<group>";
 		};
+		78E79D28247DEB22006D1FB5 /* MLModels */ = {
+			isa = PBXGroup;
+			children = (
+				78E79D1F247DEB18006D1FB5 /* candy.mlmodel */,
+				78E79D1E247DEB18006D1FB5 /* mosaic.mlmodel */,
+				78E79D20247DEB19006D1FB5 /* pointilism.mlmodel */,
+				78E79D21247DEB19006D1FB5 /* rain-princess.mlmodel */,
+				78E79D22247DEB19006D1FB5 /* udnie.mlmodel */,
+			);
+			name = MLModels;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -296,7 +319,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 789D51C32473631C00015641 /* Build configuration list for PBXNativeTarget "FNST" */;
 			buildPhases = (
-				78411AA5247418B1005809C3 /* Copy Models */,
 				789D51AB2473631B00015641 /* Sources */,
 				789D51AC2473631B00015641 /* Frameworks */,
 				789D51AD2473631B00015641 /* Resources */,
@@ -360,27 +382,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		78411AA5247418B1005809C3 /* Copy Models */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Models";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "rsync -av ${SRCROOT}/../models/coreml/* ${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		789D51AB2473631B00015641 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -388,6 +389,7 @@
 			files = (
 				78C0206824756D8F00CC111B /* RoundButton.swift in Sources */,
 				78362B16247366CE00CE4CB9 /* CGImage+CVPixelBuffer.swift in Sources */,
+				78E79D27247DEB19006D1FB5 /* udnie.mlmodel in Sources */,
 				78411AAA24742148005809C3 /* Logger.swift in Sources */,
 				780D8F4924745F96009763F3 /* ImagePicker.swift in Sources */,
 				78362B0F247366CE00CE4CB9 /* CoreML+Combine.swift in Sources */,
@@ -396,10 +398,12 @@
 				789D51B32473631B00015641 /* AppDelegate.swift in Sources */,
 				78362AFD2473652900CE4CB9 /* TransferHandler.swift in Sources */,
 				78362B13247366CE00CE4CB9 /* UIImage+RawBytes.swift in Sources */,
+				78E79D26247DEB19006D1FB5 /* rain-princess.mlmodel in Sources */,
 				78C0206C247585A700CC111B /* UIImage+SoftenBorders.swift in Sources */,
 				78362B18247366CE00CE4CB9 /* CVPixelBuffer+Helpers.swift in Sources */,
 				78362B12247366CE00CE4CB9 /* Predictions.swift in Sources */,
 				78362B1C247366CE00CE4CB9 /* Array+Extensions.swift in Sources */,
+				78E79D25247DEB19006D1FB5 /* pointilism.mlmodel in Sources */,
 				789D51B52473631B00015641 /* SceneDelegate.swift in Sources */,
 				78362B1A247366CE00CE4CB9 /* MLMultiArray+Helpers.swift in Sources */,
 				78C0206624756D8100CC111B /* CustomButton.swift in Sources */,
@@ -418,7 +422,9 @@
 				783027C12474BEE800099B11 /* LoadingView.swift in Sources */,
 				78411AA724742016005809C3 /* String+Localized.swift in Sources */,
 				78362B1B247366CE00CE4CB9 /* Math.swift in Sources */,
+				78E79D23247DEB19006D1FB5 /* mosaic.mlmodel in Sources */,
 				783027B52474916600099B11 /* Constants.swift in Sources */,
+				78E79D24247DEB19006D1FB5 /* candy.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

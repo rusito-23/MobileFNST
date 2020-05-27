@@ -22,32 +22,34 @@ enum TransferStyle: String, CaseIterable {
 // MARK: Delegate
 
 protocol TransferDelegate: class {
+    func modelInitializationFailure(with style:TransferStyle)
     func transferSuccess(image:UIImage)
     func transferFailure()
 }
 
-// MARK: Handler
+// MARK: TransferHandler
 
 class TransferHandler {
 
-    // MARK: initialization
+    // MARK: properties
 
     var models:[TransferStyle:TransferModel] = [:]
     private var processing = false
     weak var delegate: TransferDelegate?
 
-    init() {
-        initModels()
-    }
+    // MARK: initialization
 
     func initModels() {
         for style in TransferStyle.allCases {
-            // TODO: optional init for TransferModel
-            self.models[style] = TransferModel(with: style.rawValue)
+            guard let model = TransferModel(with: style.rawValue) else {
+                self.delegate?.modelInitializationFailure(with: style)
+                continue
+            }
+            self.models[style] = model
         }
     }
 
-    // MARK: process
+    // MARK: functions
 
     func process(image: UIImage, style:TransferStyle) {
         guard !self.processing else {

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 extension UILabel {
+
     func addTextOutline(_ text: String, usingFont font: UIFont) {
         let attributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.strokeColor : UIColor.orange,
@@ -19,4 +20,5 @@ extension UILabel {
         ]
         self.attributedText = NSAttributedString(string: text, attributes: attributes)
     }
+
 }

@@ -10,12 +10,16 @@ import UIKit
 
 class MainViewController: UIViewController {
 
+    // MARK: views
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var mainImage: UIImageView!
     @IBOutlet weak var getStartedInfoLabel: UILabel!
     @IBOutlet weak var cameraLabel: UILabel!
     @IBOutlet weak var galleryLabel: UILabel!
     private lazy var imagePicker = ImagePicker()
+
+    // MARK: lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +41,8 @@ class MainViewController: UIViewController {
         mainImage.softenBorders()
     }
 
+    // MARK: actions
+
     @IBAction func startFromGallery(_ sender: Any) {
         imagePicker.photoGalleryAccessRequest()
     }
@@ -56,8 +62,6 @@ class MainViewController: UIViewController {
         self.present(mvc, animated: true, completion: nil)
       }
     }
-
-    
 
 }
 

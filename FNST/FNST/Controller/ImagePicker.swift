@@ -2,6 +2,8 @@ import AVFoundation
 import Photos
 import UIKit
 
+// MARK: Delegate
+
 protocol ImagePickerDelegate: class {
     func imagePickerDelegate(canUseCamera accessIsAllowed: Bool, delegatedForm: ImagePicker)
     func imagePickerDelegate(canUseGallery accessIsAllowed: Bool, delegatedForm: ImagePicker)
@@ -9,10 +11,16 @@ protocol ImagePickerDelegate: class {
     func imagePickerDelegate(didCancel delegatedForm: ImagePicker)
 }
 
+// MARK: Picker
+
 class ImagePicker: NSObject {
+
+    // MARK: properties
 
     private weak var controller: UIImagePickerController?
     weak var delegate: ImagePickerDelegate? = nil
+
+    // MARK: UI
 
     func present(parent viewController: UIViewController, sourceType: UIImagePickerController.SourceType) {
         DispatchQueue.main.async {

@@ -10,8 +10,12 @@ import UIKit
 
 class StyleViewCell: UICollectionViewCell {
 
+    // MARK: views
+
     @IBOutlet weak var styleName: UILabel!
     @IBOutlet weak var styleIconView: UIImageView!
+
+    // MARK: initialization
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,6 +37,8 @@ class StyleViewCell: UICollectionViewCell {
             self.styleName.text = "NONE".localized()
         }
     }
+
+    // MARK: functions
 
     func selected(_ sel: Bool) {
         if sel {

@@ -10,17 +10,22 @@ import UIKit
 
 class StylesViewController: UIViewController {
 
+    // MARK: views
+
     @IBOutlet weak var preview: UIImageView!
     @IBOutlet weak var stylesCollectionView: UICollectionView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var downloadButton: UIButton!
     var loadingView: LoadingView?
 
-    let styles = TransferStyle.allCases
+    // MARK: properties
+
+    var styles = TransferStyle.allCases
     var selectedStyle = 0
     var transfer: TransferHandler?
-
     var source: UIImage?
+
+    // MARK: lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +45,7 @@ class StylesViewController: UIViewController {
         // setup transfer handler
         transfer = TransferHandler()
         transfer?.delegate = self
+        transfer?.initModels()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -47,6 +53,8 @@ class StylesViewController: UIViewController {
         let indexPath = IndexPath(row: 0, section: 0)
         self.stylesCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     }
+
+    // MARK: actions
 
     @IBAction func onBackButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -65,7 +73,16 @@ class StylesViewController: UIViewController {
 
 }
 
+// MARK: Style Transfer Delegate
+
 extension StylesViewController: TransferDelegate {
+
+    func modelInitializationFailure(with style: TransferStyle) {
+        logger.warn("Model intialization failure for style: \(style.rawValue)")
+
+        // remove failed style
+        self.styles = self.styles.filter { $0 != style }
+    }
 
     func transferSuccess(image: UIImage) {
         self.loadingView?.removeFromSuperview()
@@ -79,6 +96,8 @@ extension StylesViewController: TransferDelegate {
     }
 
 }
+
+// MARK: Collection View Delegate
 
 extension StylesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 

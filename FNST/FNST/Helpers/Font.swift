@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 struct MainFont {
+
+    // MARK: properties
+
     private static let NAME = "AvenirNext-Heavy"
     private static let titleSize: CGFloat = 120
     private static let subtitleSize: CGFloat = 32
@@ -17,6 +20,8 @@ struct MainFont {
     private static let miniParagraphSize: CGFloat = 17
     private static let superMiniParagraphSize: CGFloat = 12
     private static let buttonSize: CGFloat = 23
+
+    // MARK: fonts
 
     private static func font(size: CGFloat) -> UIFont {
         return UIFont(name: NAME, size: size) ?? UIFont.systemFont(ofSize: size)

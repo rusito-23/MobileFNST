@@ -69,10 +69,10 @@ class TransferOutput : MLFeatureProvider {
 class TransferModel {
     var model: MLModel
 
-    /// URL of model in the same bundle with name
-    class func modelURL(with name:String) -> URL {
+    /// URL of compiled model
+    class func compiledURL(with name:String) -> URL? {
         let bundle = Bundle(for: TransferModel.self)
-        return bundle.url(forResource: name, withExtension:"mlmodel")!
+        return bundle.url(forResource: name, withExtension:"mlmodelc")
     }
 
     /**
@@ -80,21 +80,12 @@ class TransferModel {
         - parameters:
            - name: the desired model name
     */
-    convenience init(with name:String) {
-        let modelURL = type(of:self).modelURL(with: name)
-        let compiledURL = try! MLModel.compileModel(at: modelURL)
-        try! self.init(contentsOf: compiledURL)
-    }
+    convenience init?(with name:String) {
+        guard let compiledURL = type(of:self).compiledURL(with: name) else {
+            return nil
+        }
 
-    /**
-        Construct a model with name & configuration
-        - parameters:
-           - name: the desired model name
-           - configuration: the desired model configuration
-           - throws: an NSError object that describes the problem
-    */
-    convenience init(with name:String, configuration: MLModelConfiguration) throws {
-        try self.init(contentsOf: type(of:self).modelURL(with: name), configuration: configuration)
+        try? self.init(contentsOf: compiledURL)
     }
 
     /**
@@ -105,17 +96,6 @@ class TransferModel {
     */
     init(contentsOf url: URL) throws {
         self.model = try MLModel(contentsOf: url)
-    }
-
-    /**
-        Construct a model with explicit path to mlmodelc file and configuration
-        - parameters:
-           - url: the file url of the model
-           - configuration: the desired model configuration
-           - throws: an NSError object that describes the problem
-    */
-    init(contentsOf url: URL, configuration: MLModelConfiguration) throws {
-        self.model = try MLModel(contentsOf: url, configuration: configuration)
     }
 
     /**
