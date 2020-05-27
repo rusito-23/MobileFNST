@@ -24,7 +24,7 @@ These are the styles:
 | <img alt='candy' src='docs/paintings/candy-painting.jpg' height=200 width=200/> | <img alt='pointilism' src='docs/paintings/pointilism-painting.jpg' height=200 width=200/> | <img alt='mosaic' src='docs/paintings/mosaic-painting.jpg' height=200 width=200/> | <img alt='rain-princess' src='docs/paintings/rain-princess-painting.jpg' height=200 width=200/> | <img alt='udnie' src='docs/paintings/udnie-painting.jpg' height=200 width=200/> |
 
 
-### Run
+### Run
 
 First, we need to run the script: `scripts/models.sh` which downloads and converts the models to *CoreML*. And that's it! Open the .xcodeproj in XCode and run!
 
