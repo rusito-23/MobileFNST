@@ -15,6 +15,7 @@
 		782543F12564A52B00E48B9B /* candy.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 782543EC2564A52B00E48B9B /* candy.mlmodel */; };
 		782543F22564A52B00E48B9B /* pointilism.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 782543ED2564A52B00E48B9B /* pointilism.mlmodel */; };
 		782543F32564A52B00E48B9B /* udnie.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 782543EE2564A52B00E48B9B /* udnie.mlmodel */; };
+		782543F62564ACB100E48B9B /* CVPixelBuffer+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782543F52564ACB100E48B9B /* CVPixelBuffer+Utils.swift */; };
 		783027AF2474870C00099B11 /* StylesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783027AE2474870C00099B11 /* StylesViewController.swift */; };
 		783027B52474916600099B11 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783027B42474916600099B11 /* Constants.swift */; };
 		783027BB2474935C00099B11 /* StyleViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783027B92474935C00099B11 /* StyleViewCell.swift */; };
@@ -24,21 +25,6 @@
 		783027C424754BA300099B11 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 783027C324754BA300099B11 /* ErrorView.swift */; };
 		783027C624754BC000099B11 /* ErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 783027C524754BC000099B11 /* ErrorView.xib */; };
 		78362AFD2473652900CE4CB9 /* TransferHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78362AFC2473652900CE4CB9 /* TransferHandler.swift */; };
-		78362B0E247366CE00CE4CB9 /* CGImagePropertyOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78362AFF247366CD00CE4CB9 /* CGImagePropertyOrientation.swift */; };
-		78362B0F247366CE00CE4CB9 /* CoreML+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78362B00247366CD00CE4CB9 /* CoreML+Combine.swift */; };
-		78362B10247366CE00CE4CB9 /* MLMultiArray+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78362B01247366CD00CE4CB9 /* MLMultiArray+Image.swift */; };
-		78362B11247366CE00CE4CB9 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78362B02247366CD00CE4CB9 /* UIImage+Extensions.swift */; };
-		78362B12247366CE00CE4CB9 /* Predictions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78362B03247366CD00CE4CB9 /* Predictions.swift */; };
-		78362B13247366CE00CE4CB9 /* UIImage+RawBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78362B04247366CD00CE4CB9 /* UIImage+RawBytes.swift */; };
-		78362B14247366CE00CE4CB9 /* MLModel+Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78362B05247366CE00CE4CB9 /* MLModel+Images.swift */; };
-		78362B15247366CE00CE4CB9 /* UIImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78362B06247366CE00CE4CB9 /* UIImage+CVPixelBuffer.swift */; };
-		78362B16247366CE00CE4CB9 /* CGImage+CVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78362B07247366CE00CE4CB9 /* CGImage+CVPixelBuffer.swift */; };
-		78362B17247366CE00CE4CB9 /* NonMaxSuppression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78362B08247366CE00CE4CB9 /* NonMaxSuppression.swift */; };
-		78362B18247366CE00CE4CB9 /* CVPixelBuffer+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78362B09247366CE00CE4CB9 /* CVPixelBuffer+Helpers.swift */; };
-		78362B19247366CE00CE4CB9 /* CGImage+RawBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78362B0A247366CE00CE4CB9 /* CGImage+RawBytes.swift */; };
-		78362B1A247366CE00CE4CB9 /* MLMultiArray+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78362B0B247366CE00CE4CB9 /* MLMultiArray+Helpers.swift */; };
-		78362B1B247366CE00CE4CB9 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78362B0C247366CE00CE4CB9 /* Math.swift */; };
-		78362B1C247366CE00CE4CB9 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78362B0D247366CE00CE4CB9 /* Array+Extensions.swift */; };
 		78411AA724742016005809C3 /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78411AA624742016005809C3 /* String+Localized.swift */; };
 		78411AAA24742148005809C3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78411AA924742148005809C3 /* Logger.swift */; };
 		78411AAC24742DC3005809C3 /* TransferModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78411AAB24742DC3005809C3 /* TransferModel.swift */; };
@@ -63,6 +49,7 @@
 		782543EC2564A52B00E48B9B /* candy.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = candy.mlmodel; sourceTree = "<group>"; };
 		782543ED2564A52B00E48B9B /* pointilism.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = pointilism.mlmodel; sourceTree = "<group>"; };
 		782543EE2564A52B00E48B9B /* udnie.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = udnie.mlmodel; sourceTree = "<group>"; };
+		782543F52564ACB100E48B9B /* CVPixelBuffer+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+Utils.swift"; sourceTree = "<group>"; };
 		783027AE2474870C00099B11 /* StylesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StylesViewController.swift; sourceTree = "<group>"; };
 		783027B42474916600099B11 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		783027B92474935C00099B11 /* StyleViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleViewCell.swift; sourceTree = "<group>"; };
@@ -72,21 +59,6 @@
 		783027C324754BA300099B11 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		783027C524754BC000099B11 /* ErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorView.xib; sourceTree = "<group>"; };
 		78362AFC2473652900CE4CB9 /* TransferHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferHandler.swift; sourceTree = "<group>"; };
-		78362AFF247366CD00CE4CB9 /* CGImagePropertyOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGImagePropertyOrientation.swift; sourceTree = "<group>"; };
-		78362B00247366CD00CE4CB9 /* CoreML+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreML+Combine.swift"; sourceTree = "<group>"; };
-		78362B01247366CD00CE4CB9 /* MLMultiArray+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MLMultiArray+Image.swift"; sourceTree = "<group>"; };
-		78362B02247366CD00CE4CB9 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
-		78362B03247366CD00CE4CB9 /* Predictions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Predictions.swift; sourceTree = "<group>"; };
-		78362B04247366CD00CE4CB9 /* UIImage+RawBytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+RawBytes.swift"; sourceTree = "<group>"; };
-		78362B05247366CE00CE4CB9 /* MLModel+Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MLModel+Images.swift"; sourceTree = "<group>"; };
-		78362B06247366CE00CE4CB9 /* UIImage+CVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CVPixelBuffer.swift"; sourceTree = "<group>"; };
-		78362B07247366CE00CE4CB9 /* CGImage+CVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImage+CVPixelBuffer.swift"; sourceTree = "<group>"; };
-		78362B08247366CE00CE4CB9 /* NonMaxSuppression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonMaxSuppression.swift; sourceTree = "<group>"; };
-		78362B09247366CE00CE4CB9 /* CVPixelBuffer+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+Helpers.swift"; sourceTree = "<group>"; };
-		78362B0A247366CE00CE4CB9 /* CGImage+RawBytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImage+RawBytes.swift"; sourceTree = "<group>"; };
-		78362B0B247366CE00CE4CB9 /* MLMultiArray+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MLMultiArray+Helpers.swift"; sourceTree = "<group>"; };
-		78362B0C247366CE00CE4CB9 /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
-		78362B0D247366CE00CE4CB9 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		78411AA624742016005809C3 /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
 		78411AA924742148005809C3 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		78411AAB24742DC3005809C3 /* TransferModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferModel.swift; sourceTree = "<group>"; };
@@ -192,34 +164,13 @@
 			path = StyleTransfer;
 			sourceTree = "<group>";
 		};
-		78362AFE2473669300CE4CB9 /* MLHelpers */ = {
-			isa = PBXGroup;
-			children = (
-				78362B0D247366CE00CE4CB9 /* Array+Extensions.swift */,
-				78362B07247366CE00CE4CB9 /* CGImage+CVPixelBuffer.swift */,
-				78362B0A247366CE00CE4CB9 /* CGImage+RawBytes.swift */,
-				78362AFF247366CD00CE4CB9 /* CGImagePropertyOrientation.swift */,
-				78362B00247366CD00CE4CB9 /* CoreML+Combine.swift */,
-				78362B09247366CE00CE4CB9 /* CVPixelBuffer+Helpers.swift */,
-				78362B0C247366CE00CE4CB9 /* Math.swift */,
-				78362B05247366CE00CE4CB9 /* MLModel+Images.swift */,
-				78362B0B247366CE00CE4CB9 /* MLMultiArray+Helpers.swift */,
-				78362B01247366CD00CE4CB9 /* MLMultiArray+Image.swift */,
-				78362B08247366CE00CE4CB9 /* NonMaxSuppression.swift */,
-				78362B03247366CD00CE4CB9 /* Predictions.swift */,
-				78362B06247366CE00CE4CB9 /* UIImage+CVPixelBuffer.swift */,
-				78362B02247366CD00CE4CB9 /* UIImage+Extensions.swift */,
-				78362B04247366CD00CE4CB9 /* UIImage+RawBytes.swift */,
-			);
-			path = MLHelpers;
-			sourceTree = "<group>";
-		};
 		78411A91247407D3005809C3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				78411AA624742016005809C3 /* String+Localized.swift */,
 				78C0206924757D1400CC111B /* UILabel+Outline.swift */,
 				78C0206B247585A700CC111B /* UIImage+SoftenBorders.swift */,
+				782543F52564ACB100E48B9B /* CVPixelBuffer+Utils.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -256,7 +207,6 @@
 				780D8F33247433E8009763F3 /* View */,
 				78411AA824742116005809C3 /* Logger */,
 				78411A91247407D3005809C3 /* Extensions */,
-				78362AFE2473669300CE4CB9 /* MLHelpers */,
 				78362AF9247364D800CE4CB9 /* StyleTransfer */,
 				789D51C92473635700015641 /* Controller */,
 				789D51C82473634C00015641 /* Stoyboard */,
@@ -388,42 +338,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				78C0206824756D8F00CC111B /* RoundButton.swift in Sources */,
-				78362B16247366CE00CE4CB9 /* CGImage+CVPixelBuffer.swift in Sources */,
 				782543F32564A52B00E48B9B /* udnie.mlmodel in Sources */,
 				78411AAA24742148005809C3 /* Logger.swift in Sources */,
 				780D8F4924745F96009763F3 /* ImagePicker.swift in Sources */,
 				782543F12564A52B00E48B9B /* candy.mlmodel in Sources */,
-				78362B0F247366CE00CE4CB9 /* CoreML+Combine.swift in Sources */,
 				783027AF2474870C00099B11 /* StylesViewController.swift in Sources */,
 				789D51B72473631B00015641 /* MainViewController.swift in Sources */,
 				789D51B32473631B00015641 /* AppDelegate.swift in Sources */,
 				78362AFD2473652900CE4CB9 /* TransferHandler.swift in Sources */,
-				78362B13247366CE00CE4CB9 /* UIImage+RawBytes.swift in Sources */,
 				78C0206C247585A700CC111B /* UIImage+SoftenBorders.swift in Sources */,
-				78362B18247366CE00CE4CB9 /* CVPixelBuffer+Helpers.swift in Sources */,
-				78362B12247366CE00CE4CB9 /* Predictions.swift in Sources */,
+				782543F62564ACB100E48B9B /* CVPixelBuffer+Utils.swift in Sources */,
 				782543F02564A52B00E48B9B /* mosaic.mlmodel in Sources */,
-				78362B1C247366CE00CE4CB9 /* Array+Extensions.swift in Sources */,
 				789D51B52473631B00015641 /* SceneDelegate.swift in Sources */,
-				78362B1A247366CE00CE4CB9 /* MLMultiArray+Helpers.swift in Sources */,
 				78C0206624756D8100CC111B /* CustomButton.swift in Sources */,
-				78362B11247366CE00CE4CB9 /* UIImage+Extensions.swift in Sources */,
-				78362B14247366CE00CE4CB9 /* MLModel+Images.swift in Sources */,
 				78411AAC24742DC3005809C3 /* TransferModel.swift in Sources */,
-				78362B15247366CE00CE4CB9 /* UIImage+CVPixelBuffer.swift in Sources */,
 				782543F22564A52B00E48B9B /* pointilism.mlmodel in Sources */,
-				78362B19247366CE00CE4CB9 /* CGImage+RawBytes.swift in Sources */,
-				78362B0E247366CE00CE4CB9 /* CGImagePropertyOrientation.swift in Sources */,
-				78362B17247366CE00CE4CB9 /* NonMaxSuppression.swift in Sources */,
 				783027BB2474935C00099B11 /* StyleViewCell.swift in Sources */,
 				780D8F3A24743445009763F3 /* Font.swift in Sources */,
 				78C0206A24757D1400CC111B /* UILabel+Outline.swift in Sources */,
 				782543EF2564A52B00E48B9B /* rain-princess.mlmodel in Sources */,
-				78362B10247366CE00CE4CB9 /* MLMultiArray+Image.swift in Sources */,
 				783027C424754BA300099B11 /* ErrorView.swift in Sources */,
 				783027C12474BEE800099B11 /* LoadingView.swift in Sources */,
 				78411AA724742016005809C3 /* String+Localized.swift in Sources */,
-				78362B1B247366CE00CE4CB9 /* Math.swift in Sources */,
 				783027B52474916600099B11 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

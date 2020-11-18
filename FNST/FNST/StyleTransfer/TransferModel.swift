@@ -13,7 +13,7 @@ class TransferInput : MLFeatureProvider {
 
     // MARK: - Properties
 
-    /// Pixel Buffer with size 224 x 224 and kCVPixelFormatType_32BGRA pixel format
+    /// Pixel Buffer with size 224 x 224 and 32ARGB pixel format
     var inputBuffer: CVPixelBuffer
 
     var featureNames: Set<String> { [Constants.inputName] }
@@ -45,7 +45,7 @@ class TransferOutput : MLFeatureProvider {
 
     // MARK: - Properties
 
-    /// Pixel Buffer with size 224 x 224 and kCVPixelFormatType_32BGRA pixel format
+    /// Pixel Buffer with size 224 x 224 and 32ARGB pixel format
     lazy var outputBuffer: CVPixelBuffer? = { [weak self] in
         self?.provider.featureValue(for: Constants.outputName)?.imageBufferValue
     }()
