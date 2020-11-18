@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-// MARK: Styles
+// MARK: - Styles
 
 enum TransferStyle: String, CaseIterable {
     case Candy = "candy"
@@ -19,7 +19,7 @@ enum TransferStyle: String, CaseIterable {
     case Udnie = "udnie"
 }
 
-// MARK: Delegate
+// MARK: - Delegate
 
 protocol TransferDelegate: class {
     func modelInitializationFailure(with style:TransferStyle)
@@ -27,21 +27,21 @@ protocol TransferDelegate: class {
     func transferFailure()
 }
 
-// MARK: TransferHandler
+// MARK: - TransferHandler
 
 class TransferHandler {
 
-    // MARK: properties
+    // MARK: - Properties
 
-    var models:[TransferStyle:TransferModel] = [:]
-    private var processing = false
     weak var delegate: TransferDelegate?
+    private var models: [TransferStyle:TransferModel] = [:]
 
-    // MARK: initialization
+    // MARK: - Methods
 
-    func initModels() {
+    /// Initialize all available models
+    func start() {
         for style in TransferStyle.allCases {
-            guard let model = TransferModel(with: style.rawValue) else {
+            guard let model = TransferModel(name: style.rawValue) else {
                 self.delegate?.modelInitializationFailure(with: style)
                 continue
             }
@@ -51,19 +51,12 @@ class TransferHandler {
 
     // MARK: functions
 
-    func process(image: UIImage, style:TransferStyle) {
-        guard !self.processing else {
-            // avoid processing twice
-            return
-        }
-        self.processing = true
-
+    func process(image: UIImage, style: TransferStyle) {
         // create input
         let originalSize = image.size
         guard let pixelInput = image.pixelBuffer(width: 224, height: 224) else {
             logger.warn("Transfer failure in step: preprocessing")
             self.delegate?.transferFailure()
-            self.processing = false
             return
         }
         let input = TransferInput(with: pixelInput)
@@ -75,23 +68,23 @@ class TransferHandler {
             guard let model = self.models[style],
                   let output = try? model.prediction(input: input) else {
                 logger.warn("Transfer failure in step: processing")
-                self.delegate?.transferFailure()
-                self.processing = false
+                DispatchQueue.main.async { self.delegate?.transferFailure() }
                 return
             }
 
             DispatchQueue.main.async {
                 // get output & postprocessing
-                guard let imageOutput = UIImage(pixelBuffer: output.imageOutput) else {
+                guard
+                    let outputBuffer = output.outputBuffer,
+                    let imageOutput = UIImage(pixelBuffer: outputBuffer)
+                else {
                     logger.warn("Transfer failure in step: post-processing")
                     self.delegate?.transferFailure()
-                    self.processing = false
                     return
                 }
 
                 let resizedOutput = imageOutput.resized(to: originalSize)
                 self.delegate?.transferSuccess(image: resizedOutput)
-                self.processing = false
             }
         }
     }

@@ -1,158 +1,120 @@
-//
-// TransferModel.swift
-//
-
 import CoreML
 
+// MARK: - Style Transfer Model Input
 
-/// Model Input Type
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 class TransferInput : MLFeatureProvider {
 
-    /// input as color (kCVPixelFormatType_32BGRA) image buffer
-    ///  224 pixels wide by 224 pixels high
-    var imageInput: CVPixelBuffer
+    // MARK: - Constants
 
-    var featureNames: Set<String> {
-        get {
-            return ["input1"]
-        }
+    private struct Constants {
+        static let inputName = "input1"
     }
+
+    // MARK: - Properties
+
+    /// Pixel Buffer with size 224 x 224 and kCVPixelFormatType_32BGRA pixel format
+    var inputBuffer: CVPixelBuffer
+
+    var featureNames: Set<String> { [Constants.inputName] }
+
+    // MARK: - Initializer
+
+    init(with buffer: CVPixelBuffer) {
+        self.inputBuffer = buffer
+    }
+
+    // MARK: - Methods
 
     func featureValue(for featureName: String) -> MLFeatureValue? {
-        if (featureName == "input1") {
-            return MLFeatureValue(pixelBuffer: imageInput)
-        }
-        return nil
-    }
-
-    init(with image: CVPixelBuffer) {
-        self.imageInput = image
+        guard featureName == Constants.inputName else { return nil }
+        return MLFeatureValue(pixelBuffer: inputBuffer)
     }
 }
 
-/// Model Output Type
+// MARK: - Style Transfer Model Output
+
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 class TransferOutput : MLFeatureProvider {
 
-    /// Source provided by CoreML
+    // MARK: - Constants
+
+    private struct Constants {
+        static let outputName = "output1"
+    }
+
+    // MARK: - Properties
+
+    /// Pixel Buffer with size 224 x 224 and kCVPixelFormatType_32BGRA pixel format
+    lazy var outputBuffer: CVPixelBuffer? = { [weak self] in
+        self?.provider.featureValue(for: Constants.outputName)?.imageBufferValue
+    }()
+
+    var featureNames: Set<String> { self.provider.featureNames }
+
+    // MARK: - Private properties
 
     private let provider : MLFeatureProvider
 
+    // MARK: - Initializer
 
-    /// output as color (kCVPixelFormatType_32BGRA) image buffer
-    ///  224 pixels wide by 224 pixels high
-    lazy var imageOutput: CVPixelBuffer = {
-        [unowned self] in return self.provider.featureValue(for: "output1")!.imageBufferValue
-    }()!
+    init?(pixelBuffer: CVPixelBuffer) {
+        guard let provider = try? MLDictionaryFeatureProvider(
+            dictionary: [Constants.outputName : MLFeatureValue(pixelBuffer: pixelBuffer)]
+        ) else { return nil }
 
-    var featureNames: Set<String> {
-        return self.provider.featureNames
-    }
-
-    func featureValue(for featureName: String) -> MLFeatureValue? {
-        return self.provider.featureValue(for: featureName)
-    }
-
-    init(output1: CVPixelBuffer) {
-        self.provider = try! MLDictionaryFeatureProvider(dictionary: ["output1" : MLFeatureValue(pixelBuffer: output1)])
+        self.provider = provider
     }
 
     init(features: MLFeatureProvider) {
         self.provider = features
     }
+
+    // MARK: - Methods
+
+    func featureValue(for featureName: String) -> MLFeatureValue? {
+        guard featureName == Constants.outputName else { return nil }
+        return self.provider.featureValue(for: featureName)
+    }
 }
 
+// MARK: - Style Transfer Model
 
-/// Class for model loading and prediction
+
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 class TransferModel {
-    var model: MLModel
 
-    /// URL of compiled model
-    class func compiledURL(with name:String) -> URL? {
-        let bundle = Bundle(for: TransferModel.self)
-        return bundle.url(forResource: name, withExtension:"mlmodelc")
+    // MARK: - Constants
+
+    private struct Constants {
+        static let fileType = "mlmodelc"
     }
 
-    /**
-        Construct a model with name
-        - parameters:
-           - name: the desired model name
-    */
-    convenience init?(with name:String) {
-        guard let compiledURL = type(of:self).compiledURL(with: name) else {
-            return nil
-        }
+    // MARK: - Properties
 
-        try? self.init(contentsOf: compiledURL)
+    private var model: MLModel
+
+    // MARK: - Initializers
+
+    init?(name: String) {
+        guard
+            let compiledURL = Bundle.main.url(
+                forResource: name,
+                withExtension: Constants.fileType
+            ),
+            let model = try? MLModel(contentsOf: compiledURL)
+        else { return nil }
+
+        self.model = model
     }
 
-    /**
-        Construct a model with explicit path to mlmodelc file
-        - parameters:
-           - url: the file url of the model
-           - throws: an NSError object that describes the problem
-    */
-    init(contentsOf url: URL) throws {
-        self.model = try MLModel(contentsOf: url)
-    }
+    // MARK: - Predict Methods
 
-    /**
-        Make a prediction using the structured interface
-        - parameters:
-           - input: the input to the prediction as TransferInput
-        - throws: an NSError object that describes the problem
-        - returns: the result of the prediction as TransferOutput
-    */
     func prediction(input: TransferInput) throws -> TransferOutput {
-        return try self.prediction(input: input, options: MLPredictionOptions())
+        try self.prediction(input: input, options: MLPredictionOptions())
     }
 
-    /**
-        Make a prediction using the structured interface
-        - parameters:
-           - input: the input to the prediction as TransferInput
-           - options: prediction options
-        - throws: an NSError object that describes the problem
-        - returns: the result of the prediction as TransferOutput
-    */
     func prediction(input: TransferInput, options: MLPredictionOptions) throws -> TransferOutput {
-        let outFeatures = try model.prediction(from: input, options:options)
-        return TransferOutput(features: outFeatures)
-    }
-
-    /**
-        Make a prediction using the convenience interface
-        - parameters:
-            - input1 as color (kCVPixelFormatType_32BGRA) image buffer, 224 pixels wide by 224 pixels high
-        - throws: an NSError object that describes the problem
-        - returns: the result of the prediction as TransferOutput
-    */
-    func prediction(imageInput: CVPixelBuffer) throws -> TransferOutput {
-        let input_ = TransferInput(with: imageInput)
-        return try self.prediction(input: input_)
-    }
-
-    /**
-        Make a batch prediction using the structured interface
-        - parameters:
-           - inputs: the inputs to the prediction as [TransferInput]
-           - options: prediction options
-        - throws: an NSError object that describes the problem
-        - returns: the result of the prediction as [TransferOutput]
-    */
-    func predictions(inputs: [TransferInput], options: MLPredictionOptions = MLPredictionOptions()) throws -> [TransferOutput] {
-        let batchIn = MLArrayBatchProvider(array: inputs)
-        let batchOut = try model.predictions(from: batchIn, options: options)
-        var results : [TransferOutput] = []
-        results.reserveCapacity(inputs.count)
-        for i in 0..<batchOut.count {
-            let outProvider = batchOut.features(at: i)
-            let result =  TransferOutput(features: outProvider)
-            results.append(result)
-        }
-        return results
+        TransferOutput(features: try model.prediction(from: input, options:options))
     }
 }
-

@@ -45,7 +45,7 @@ class StylesViewController: UIViewController {
         // setup transfer handler
         transfer = TransferHandler()
         transfer?.delegate = self
-        transfer?.initModels()
+        transfer?.start()
     }
 
     override func viewDidAppear(_ animated: Bool) {
