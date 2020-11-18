@@ -1,0 +1,30 @@
+/* 
+  Localized.strings
+  FNST
+
+  Created by Igor Andruskiewitsch on 5/19/20.
+  Copyright © 2020 Igor Andruskiewitsch. All rights reserved.
+*/
+
+// MARK: Texts
+
+"APP_TITLE" = "FNST";
+"GET_STARTED" = "Choose a picture to get started!";
+"NONE" = "Original";
+
+// MARK: Buttons
+
+"CAMERA_BUTTON" = "Camera";
+"GALLERY_BUTTON" = "Gallery";
+
+
+// MARK: ErrorView
+
+"ERROR_DEFAULT_TITLE" = "Oops!";
+"ERROR_DEFAULT_DESCRIPTION" = "An error occurred. We're not sure what happened";
+"ERROR_DEFAULT_BUTTON" = "OK";
+
+// MARK: ImagePicker Error
+
+"PICKER_ERROR_TITLE" = "Access request to the %@";
+"PICKER_ERROR_DESCRIPTION" = "Please allow access to %@ from the Settings App.";

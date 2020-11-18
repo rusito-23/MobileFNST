@@ -3,16 +3,14 @@
 # escape on errors
 set -e
 
-# check if we are on the right path
+# define paths
+COREML_FOLDER=FNST/Models
 
-if [ ! -d scripts ]; then
+# check if we are on the right path
+if [ ! -d $COREML_FOLDER ]; then
     echo "This script should run from the repo root folder"
     exit 1
 fi
-
-# define paths
-FNST=FNST/FNST
-COREML_FOLDER=$FNST/Models
 
 # create temp dir for onnx models
 ONNX_FOLDER=`mktemp /tmp/fnst-onnx-models-XXXXX`
