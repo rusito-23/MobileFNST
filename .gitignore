@@ -86,8 +86,9 @@ DerivedData/
 ### CUSTOM ###
 # -----------#
 
-models
+# CoreML Models
+FNST/FNST/Models
 
-## Pods
+# Pods
 Pods
 Podfile.lock
