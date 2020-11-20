@@ -3,7 +3,7 @@ import CoreML
 // MARK: - Style Transfer Model Input
 
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-class TransferInput : MLFeatureProvider {
+final class TransferInput : MLFeatureProvider {
 
     // MARK: - Constants
 
@@ -35,7 +35,7 @@ class TransferInput : MLFeatureProvider {
 // MARK: - Style Transfer Model Output
 
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-class TransferOutput : MLFeatureProvider {
+final class TransferOutput : MLFeatureProvider {
 
     // MARK: - Constants
 
@@ -82,7 +82,7 @@ class TransferOutput : MLFeatureProvider {
 
 
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-class TransferModel {
+final class TransferModel {
 
     // MARK: - Constants
 

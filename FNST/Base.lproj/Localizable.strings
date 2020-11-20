@@ -1,30 +1,36 @@
-/* 
-  Localized.strings
-  FNST
 
-  Created by Igor Andruskiewitsch on 5/19/20.
-  Copyright © 2020 Igor Andruskiewitsch. All rights reserved.
-*/
-
-// MARK: Texts
+// MARK: - Main View
 
 "APP_TITLE" = "FNST";
 "GET_STARTED" = "Choose a picture to get started!";
+
+// MARK: - Image Picker Controller
+
+"CAMERA_ACCESS_PROCESS" = "Checking camera access...";
+"CAMERA_ACCESS_FAILED" = "We don't have acces to your camera";
+
+"GALLERY_ACCESS_PROCESS" = "Checking gallery access...";
+"GALLERY_ACCESS_FAILED" = "We don't have acces to your gallery";
+
+"LOAD_IMAGE_FAILED" = "We are having some problems to load your image";
+
+// MARK: - Styles View Controller
+
 "NONE" = "Original";
 
-// MARK: Buttons
+// MARK: - Buttons
 
 "CAMERA_BUTTON" = "Camera";
 "GALLERY_BUTTON" = "Gallery";
 
 
-// MARK: ErrorView
+// MARK: - ErrorView
 
-"ERROR_DEFAULT_TITLE" = "Oops!";
-"ERROR_DEFAULT_DESCRIPTION" = "An error occurred. We're not sure what happened";
-"ERROR_DEFAULT_BUTTON" = "OK";
+"OH_OK" = "Oh... Ok";
+"DEFAULT_ERROR_MESSAGE" = "We're not sure what happened";
 
-// MARK: ImagePicker Error
+// MARK: - Transfer Style View
 
-"PICKER_ERROR_TITLE" = "Access request to the %@";
-"PICKER_ERROR_DESCRIPTION" = "Please allow access to %@ from the Settings App.";
+"TRANSFER_PROCESS" = "Stylizing!";
+"TRANSFER_FAILED" = "The style transfer failed! Please try again...";
+"TRANSFER_SHARE_FAILED" = "Failed to retrieve result image!";

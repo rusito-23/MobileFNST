@@ -6,5 +6,6 @@ target 'FNST' do
     pod 'SwiftyBeaver'
     pod 'PopupDialog', '~> 1.1'
     pod 'SwiftSpinner'
+    pod "TinyConstraints"
 
 end

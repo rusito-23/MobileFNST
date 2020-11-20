@@ -1,91 +1,98 @@
-//
-//  MainViewController.swift
-//  FNST
-//
-//  Created by Igor Andruskiewitsch on 5/18/20.
-//  Copyright © 2020 Igor Andruskiewitsch. All rights reserved.
-//
-
 import UIKit
+import SwiftSpinner
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
 
-    // MARK: views
+    // MARK: - Properties
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var mainImage: UIImageView!
-    @IBOutlet weak var getStartedInfoLabel: UILabel!
-    @IBOutlet weak var cameraLabel: UILabel!
-    @IBOutlet weak var galleryLabel: UILabel!
-    private lazy var imagePicker = ImagePicker()
+    private lazy var imagePickerController: ImagePickerController = {
+        let picker = ImagePickerController()
+        picker.delegate = self
+        return picker
+    }()
 
-    // MARK: lifecycle
+    // MARK: - Subviews
+
+    private lazy var mainView = MainView()
+    private var galleryButton: UIButton { mainView.galleryButton }
+    private var cameraButton: UIButton { mainView.cameraButton }
+
+    // MARK: - View Lifecycle
+
+    override func loadView() {
+        view = mainView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .black
 
-        // setup image picker
-        imagePicker.delegate = self
-
-        // setup ui
-        titleLabel.addTextOutline("APP_TITLE".localized(), usingFont: MainFont.title())
-
-        cameraLabel.text = "CAMERA_BUTTON".localized()
-        cameraLabel.font = MainFont.superMiniParagraph()
-        galleryLabel.text = "GALLERY_BUTTON".localized()
-        galleryLabel.font = MainFont.superMiniParagraph()
-
-        getStartedInfoLabel.text = "GET_STARTED".localized()
-        getStartedInfoLabel.font = MainFont.miniParagraph()
-
-        mainImage.softenBorders()
+        galleryButton.addTarget(self, action: #selector(onGalleryButtonAction), for: .touchUpInside)
+        cameraButton.addTarget(self, action: #selector(onCameraButtonAction), for: .touchUpInside)
     }
 
-    // MARK: actions
+    // MARK: - Actions
 
-    @IBAction func startFromGallery(_ sender: Any) {
-        imagePicker.photoGalleryAccessRequest()
+    @objc private func onGalleryButtonAction(_ sender: UIButton) {
+        imagePickerController.photoGalleryAccessRequest()
     }
 
-    @IBAction func startFromCamera(_ sender: Any) {
-        imagePicker.cameraAccessRequest()
+    @objc private func onCameraButtonAction(_ sender: UIButton) {
+        imagePickerController.cameraAccessRequest()
     }
+
+    // MARK: - Methods
 
     private func presentImagePicker(sourceType: UIImagePickerController.SourceType) {
-        imagePicker.present(parent: self, sourceType: sourceType)
-    }
-
-    private func showStylesController(image: UIImage) {
-        if let mvc = UIStoryboard(name: Constants.Storyboards.MAIN, bundle: nil)
-            .instantiateViewController(withIdentifier: Constants.ViewControllers.STYLES) as? StylesViewController {
-        mvc.source = image
-        self.present(mvc, animated: true, completion: nil)
-      }
-    }
-
-}
-
-extension MainViewController: ImagePickerDelegate {
-
-    func imagePickerDelegate(didSelect image: UIImage, delegatedForm: ImagePicker) {
-        imagePicker.dismiss()
-        showStylesController(image: image)
-    }
-
-    func imagePickerDelegate(didCancel delegatedForm: ImagePicker) {
-        imagePicker.dismiss()
-    }
-
-    func imagePickerDelegate(canUseGallery accessIsAllowed: Bool, delegatedForm: ImagePicker) {
-        if accessIsAllowed {
-            presentImagePicker(sourceType: .photoLibrary)
-        }
-    }
-
-    func imagePickerDelegate(canUseCamera accessIsAllowed: Bool, delegatedForm: ImagePicker) {
-        if accessIsAllowed {
-            presentImagePicker(sourceType: .camera)
-        }
+        imagePickerController.present(parent: self, sourceType: sourceType)
     }
 }
 
+// MARK: - ImagePickerControllerDelegate
+
+extension MainViewController: ImagePickerControllerDelegate {
+    func imagePicker(_ imagePicker: ImagePickerController, canUseCamera allowed: Bool) {
+        guard allowed else {
+            log.error("Camera access request failed!")
+            ErrorDialog(
+                message: "CAMERA_ACCESS_FAILED".localized
+            ).present(self)
+            return
+        }
+
+        presentImagePicker(sourceType: .camera)
+    }
+
+    func imagePicker(_ imagePicker: ImagePickerController, canUseGallery allowed: Bool) {
+        guard allowed else {
+            log.error("Gallery access request failed!")
+            ErrorDialog(
+                message: "GALLERY_ACCESS_FAILED".localized
+            ).present(self)
+            return
+        }
+
+        presentImagePicker(sourceType: .photoLibrary)
+    }
+
+    func imagePicker(_ imagePicker: ImagePickerController, didSelect image: UIImage) {
+        imagePicker.dismiss { [weak self] in
+            let styleTransferViewController = StyleTransferViewController(image)
+            styleTransferViewController.modalPresentationStyle = .fullScreen
+            self?.present(styleTransferViewController, animated: true)
+        }
+    }
+
+    func imagePicker(_ imagePicker: ImagePickerController, didCancel cancel: Bool) {
+        if cancel { imagePicker.dismiss() }
+    }
+
+    func imagePicker(_ imagePicker: ImagePickerController, didFail failed: Bool) {
+        if failed {
+            imagePicker.dismiss()
+            ErrorDialog(
+                message: "LOAD_IMAGE_FAILED".localized
+            ).present(self)
+        }
+    }
+}

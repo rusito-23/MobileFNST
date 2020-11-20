@@ -2,27 +2,27 @@ import Foundation
 import UIKit
 import VideoToolbox
 
-// MARK: - Styles
-
-enum TransferStyle: String, CaseIterable {
-    case Candy = "candy"
-    case Pointilism = "pointilism"
-    case Mosaic = "mosaic"
-    case RainPrincess = "rain-princess"
-    case Udnie = "udnie"
-}
-
 // MARK: - Delegate
 
 protocol TransferDelegate: class {
-    func modelInitializationFailure(with style:TransferStyle)
-    func transferSuccess(image:UIImage)
-    func transferFailure()
+    func transferHandler(_ transferHandler: TransferHandler, didFailedInitialization style: TransferHandler.Style)
+    func transferHandler(_ transferHandler: TransferHandler, didTransferStyle result: UIImage)
+    func transferHandler(_ transferHandler: TransferHandler, didFailedTransfer error: Error?)
 }
 
 // MARK: - TransferHandler
 
-class TransferHandler {
+final class TransferHandler {
+
+    // MARK: - Styles
+
+    enum Style: String, CaseIterable {
+        case Candy = "candy"
+        case Pointilism = "pointilism"
+        case Mosaic = "mosaic"
+        case RainPrincess = "rain-princess"
+        case Udnie = "udnie"
+    }
 
     // MARK: - Constants
 
@@ -51,26 +51,26 @@ class TransferHandler {
     // MARK: - Properties
 
     weak var delegate: TransferDelegate?
-    private var models: [TransferStyle:TransferModel] = [:]
+    private var models: [Style:TransferModel] = [:]
     private let queue = DispatchQueue(label: Constants.Queue.label)
 
     // MARK: - Methods
 
     func start() {
-        for style in TransferStyle.allCases {
+        for style in Style.allCases {
             guard let model = TransferModel(name: style.rawValue) else {
-                self.delegate?.modelInitializationFailure(with: style)
+                self.delegate?.transferHandler(self, didFailedInitialization: style)
                 continue
             }
             self.models[style] = model
         }
     }
 
-    func process(image: UIImage, style: TransferStyle) {
+    func process(image: UIImage, style: Style) {
         // preprocess input
         guard let input = preprocess(image) else {
-            logger.warn("Style transfer preprocessing failed")
-            self.delegate?.transferFailure()
+            log.warning("Style transfer preprocessing failed")
+            self.delegate?.transferHandler(self, didFailedTransfer: nil)
             return
         }
 
@@ -80,8 +80,8 @@ class TransferHandler {
                 let model = self.models[style],
                 let output = try? model.prediction(input: input)
             else {
-                logger.warn("Style transfer failed")
-                DispatchQueue.main.async { self.delegate?.transferFailure() }
+                log.warning("Style transfer failed")
+                DispatchQueue.main.async { self.delegate?.transferHandler(self, didFailedTransfer: nil) }
                 return
             }
 
@@ -91,12 +91,12 @@ class TransferHandler {
                     output.outputBuffer,
                     originalSize: image.size
                 ) else {
-                    logger.warn("Style transfer postprocessing failed")
-                    self.delegate?.transferFailure()
+                    log.warning("Style transfer postprocessing failed")
+                    self.delegate?.transferHandler(self, didFailedTransfer: nil)
                     return
                 }
 
-                self.delegate?.transferSuccess(image: imageOutput)
+                self.delegate?.transferHandler(self, didTransferStyle: imageOutput)
             }
         }
     }
