@@ -7,12 +7,12 @@
 // MARK: - Image Picker Controller
 
 "CAMERA_ACCESS_PROCESS" = "Checking camera access...";
-"CAMERA_ACCESS_FAILED" = "We don't have acces to your camera";
+"CAMERA_ACCESS_FAILED" = "We don't have acces to your camera 🤷‍♂️";
 
 "GALLERY_ACCESS_PROCESS" = "Checking gallery access...";
-"GALLERY_ACCESS_FAILED" = "We don't have acces to your gallery";
+"GALLERY_ACCESS_FAILED" = "We don't have acces to your gallery 🤷‍♂️";
 
-"LOAD_IMAGE_FAILED" = "We are having some problems to load your image";
+"LOAD_IMAGE_FAILED" = "We are having some problems to load your image 😬";
 
 // MARK: - Styles View Controller
 
@@ -31,6 +31,10 @@
 
 // MARK: - Transfer Style View
 
-"TRANSFER_PROCESS" = "Stylizing!";
-"TRANSFER_FAILED" = "The style transfer failed! Please try again...";
-"TRANSFER_SHARE_FAILED" = "Failed to retrieve result image!";
+"TRANSFER_PROCESS" = "Transfer in progress! 🥳";
+
+"TRANSFER_PREPROCESS_FAILED" = "Pre-process failed 🤷‍♂️";
+"TRANSFER_PROCESS_FAILED" = "Style transfer failed! Please try again 🙏";
+"TRANSFER_POSTPROCESS_FAILED" = "Post-process failed 🤷‍♂️";
+
+"TRANSFER_SHARE_FAILED" = "Failed to retrieve result image 😬";

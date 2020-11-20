@@ -131,9 +131,9 @@ extension StyleTransferViewController: TransferDelegate {
 
     func transferHandler(
         _ transferHandler: TransferHandler,
-        didFailedTransfer error: Error?
+        didFailedTransfer error: TransferHandler.Error
     ) {
-        ErrorDialog(message: "TRANSFER_FAILED".localized).present(self)
+        ErrorDialog(message: error.localizedDescription).present(self)
     }
 
     func transferHandler(

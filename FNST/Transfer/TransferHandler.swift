@@ -7,7 +7,7 @@ import VideoToolbox
 protocol TransferDelegate: class {
     func transferHandler(_ transferHandler: TransferHandler, didFailedInitialization style: TransferHandler.Style)
     func transferHandler(_ transferHandler: TransferHandler, didTransferStyle result: UIImage)
-    func transferHandler(_ transferHandler: TransferHandler, didFailedTransfer error: Error?)
+    func transferHandler(_ transferHandler: TransferHandler, didFailedTransfer error: TransferHandler.Error)
 }
 
 // MARK: - TransferHandler
@@ -22,6 +22,16 @@ final class TransferHandler {
         case Mosaic = "mosaic"
         case RainPrincess = "rain-princess"
         case Udnie = "udnie"
+    }
+
+    // MARK: - Error
+
+    enum Error: String, Swift.Error {
+        case preprocess = "TRANSFER_PREPROCESS_FAILED"
+        case process = "TRANSFER_PROCESS_FAILED"
+        case postprocess = "TRANSFER_POSTPROCESS_FAILED"
+
+        var localizedDescription: String { rawValue.localized }
     }
 
     // MARK: - Constants
@@ -67,21 +77,20 @@ final class TransferHandler {
     }
 
     func process(image: UIImage, style: Style) {
-        // preprocess input
-        guard let input = preprocess(image) else {
-            log.warning("Style transfer preprocessing failed")
-            self.delegate?.transferHandler(self, didFailedTransfer: nil)
-            return
-        }
-
-        // pass through the net
         queue.async {
+            // preprocess input
+            guard let input = self.preprocess(image) else {
+                log.warning("Style transfer preprocessing failed")
+                DispatchQueue.main.async { self.delegate?.transferHandler(self, didFailedTransfer: .preprocess) }
+                return
+            }
+
             guard
                 let model = self.models[style],
                 let output = try? model.prediction(input: input)
             else {
                 log.warning("Style transfer failed")
-                DispatchQueue.main.async { self.delegate?.transferHandler(self, didFailedTransfer: nil) }
+                DispatchQueue.main.async { self.delegate?.transferHandler(self, didFailedTransfer: .process) }
                 return
             }
 
@@ -92,7 +101,7 @@ final class TransferHandler {
                     originalSize: image.size
                 ) else {
                     log.warning("Style transfer postprocessing failed")
-                    self.delegate?.transferHandler(self, didFailedTransfer: nil)
+                    self.delegate?.transferHandler(self, didFailedTransfer: .postprocess)
                     return
                 }
 
